@@ -1,0 +1,31 @@
+{layout '../@dashboard.latte'}
+
+{block content}
+    <a n:href="Room:edit hotelId => $hotelId" n:if="!$isNew && ($user->getId() === $owner->getId() || $user->isInRole('admin'))" class="btn btn-primary" style="margin: 10px">Přidat pokoj</a>
+    <a n:if="!$isNew" style="margin: 10px; max-width: 225px;" n:href="Reservation:default hotelId => $hotelId" class="btn btn-primary">Zobrazit rezervace hotelu</a>
+    <p style="margin-top:15px;"></p>
+    <center>
+        <div style="margin-left:100px;margin-right:100px;padding-bottom:30px;padding-top:15px;">
+            <div class="col-lg-8 col-md-8 text-center" style="font-size: 30px;padding-bottom: 5px;padding-top:10px;">
+                <div class="alert alert-primary" role="alert">
+                    {if $isNew}Přidání hotelu{else}Editace hotelu{/if}
+                </div>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                Položky označené (<span style="color:red;">*</span>) jsou povinné.
+            </div>
+            {control hotelForm}
+        </div>
+    </center>
+    <center>
+        <div n:if="!empty($images)" class="alert alert-primary" role="alert">
+            <h3>Nahrané obrázky</h3>
+        </div>
+    </center>
+    <div n:snippet="images" class="row" style="margin-left:100px;margin-right:100px;padding-bottom:30px;padding-top:15px;">
+         <div n:foreach="$images as $imageId => $image" style="display: flex; flex-direction: column; align-items: center; margin: 10px;">
+            <img src="{$image|dataStream}" style="margin-bottom: 10px;" class="img-thumbnail">
+            <a n:href="deleteImage! $imageId" class="btn btn-danger">Smazat</a>
+         </div>
+    </div>
+{/block}

@@ -1,0 +1,22 @@
+{layout '@layout.latte'}
+
+{block jmeno}
+    Přehled uživatele {$userName}
+{/block}
+
+{block userForm}
+    <div class="tab-pane active" id="obecneUdaje" style="font-size: 18px;">
+        <div class="col-lg-8 col-md-12 col-sm-12 ">
+            <h4><i class="fa fa-envelope" aria-hidden="true"></i> Email</h4>
+            {$email}
+            <hr>
+            <h4><i class="fa fa-phone" aria-hidden="true"></i> Telefon</h4>
+            {$phone}
+            <hr>
+            <h4 style="margin-top:15px;"> Oprávnění</h4>
+            {$role}
+            <hr>
+            <a n:href="Reservation:default userId => $userId" class="btn btn-primary">Zobrazit rezervace uživatele</a>
+        </div>
+    </div>
+{/block}

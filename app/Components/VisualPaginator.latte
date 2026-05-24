@@ -1,0 +1,40 @@
+{*
+ * @param Paginator $paginator
+ * @param array     $steps
+ * @param boolean   $ajax
+ *}
+{if $paginator->pageCount > 1}
+{var $link = $ajax ? 'showPage!' : 'this'}
+<nav>
+    <ul class="pagination">
+            {if $paginator->isFirst()}
+                <li class="disabled"><a href="#"><span class="fa fa-arrow-left"></span></a></li>
+            {else}
+                <li>
+                    <a href="{link $link, 'page' => $paginator->page - 1}" n:class="$ajax ? ajax">
+                        <span class="fa fa-arrow-left"></span>
+                    </a>
+                </li>
+            {/if}
+
+            {foreach $steps as $step}
+            {if $step == $paginator->page}
+                <li class="active"><a href="#">{$step}</a></li>
+            {else}
+                <li><a href="{link $link, 'page' => $step}" n:class="$ajax ? ajax">{$step}</a></li>
+            {/if}
+            {if $iterator->nextValue > $step + 1}<li><a href="#">…</a></li>{/if}
+            {/foreach}
+
+            {if $paginator->isLast()}
+                <li class=""><a href="#"><span class="fa fa-arrow-right"></span></a></li>
+            {else}
+                <li>
+                    <a href="{link $link, 'page' => $paginator->page + 1}" n:class="$ajax ? ajax">
+                        <span class="fa fa-arrow-right"></span>
+                    </a>
+                </li>
+            {/if}
+    </ul>
+</nav>
+{/if}

@@ -1,0 +1,13 @@
+{layout '../@dashboard.latte'}
+
+{block content}
+    <center>
+        <div class="col-lg-8 col-md-8 text-center" style="font-size: 30px;padding-bottom: 5px;padding-top:10px;">
+            <div class="alert alert-primary" role="alert">
+                {$title}
+            </div>
+        </div>
+
+        {control reservationsGrid}
+    </center>
+{/block}

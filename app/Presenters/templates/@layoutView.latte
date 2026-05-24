@@ -1,0 +1,49 @@
+{layout '@dashboard.latte'}
+
+{block content}
+    {include header}
+    <div class="row" style="padding-bottom: 40px;margin-top:40px;">
+        <div class="col-sm-2 col-lg-2">
+        </div>
+        <div class="col-sm-4 col-lg-3">
+            <div class="text-center">
+                {foreach $images as $image}
+                    <img src="{$image|dataStream}" class="img-thumbnail" alt="profilovka">
+                    {breakIf $iterator->isFirst()}
+                {/foreach}
+                {include imageAddition}
+            </div>
+            <br>
+
+        </div>
+        <div class="col-sm-6">
+            <ul class="nav nav-stacked nav-pills" id="menuTabu">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#obecneUdaje">Obecné údaje</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#obrazky" >Obrázky</a>
+                </li>
+            </ul>
+            <br>
+            <div class="tab-content">
+                {include body}
+                <div class="tab-pane" id="obrazky">
+                    {foreach $images as $image}
+                        {continueIf $iterator->isFirst()}
+                        <img src="{$image|dataStream}" class="img-thumbnail" alt="profilovka">
+                    {/foreach}
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}
+
+{block scripts}
+    {include parent}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#menuTabu a[href="#{{ old('tab') }}"]').tab('show')
+        });
+    </script>
+{/block}

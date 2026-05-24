@@ -1,0 +1,96 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-2"/>
+    <title>Projekt IIS</title>
+    <style type="text/css">
+        table { border-collapse: collapse; }
+        td, th { border: 1px solid black; padding: 0.3em 0.5em; text-align: left; }
+        dt { font-weight: bold; margin-top: 0.5em; }
+    </style>
+</head>
+<body>
+
+<h1>Hotel: rezervace a správa ubytování</h1>
+
+<dl>
+    <dt>Autoři</dt>
+    <dd>Matěj Hlávka
+        <a href="mailto:xhlavk08@stud.fit.vutbr.cz">xhlavk08@stud.fit.vutbr.cz</a> -
+        Návrh databáze, backend, refaktorizace, code review
+    </dd>
+    <dd>Pavel Sklenář
+        <a href="mailto:xsklen12@stud.fit.vutbr.cz">xsklen12@stud.fit.vutbr.cz</a> -
+        Návrh databáze, frontend, testování
+    </dd>
+    <dd>Tomáš Křenek
+        <a href="mailto:xkrene15@stud.fit.vutbr.cz">xkrene15@stud.fit.vutbr.cz</a> -
+        Návrh databáze, frontend, dokumentace
+    </dd>
+    <dt>URL aplikace</dt>
+    <dd><a href="http://www.xhlavk08.8u.cz">http://www.xhlavk08.8u.cz</a></dd>
+</dl>
+
+<h2>Uživatelé systému pro testování</h2>
+<p>Uveďte prosím existující zástupce <strong>všech rolí uživatelů</strong>.</p>
+<table>
+    <tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
+    <tr><td>admin</td><td>admin</td><td>Administrátor</td></tr>
+    <tr><td>owner</td><td>owner</td><td>Vlastník</td></tr>
+    <tr><td>receptionist</td><td>receptionist</td><td>Recepční</td></tr>
+    <tr><td>customer</td><td>customer</td><td>Zákazník</td></tr>
+</table>
+
+<h2>Implementace</h2>
+<p>Seznam presenterů a popis jejich účelu:</p>
+<ul>
+    <li><i>app/Presenters/BasePresenter</i>: abstraktní presenter, slouží pro inject všech repository objektů a vytvoření přihlašovacího a odhlašovacího formuláře</li>
+    <li><i>app/Presenters/HomepagePresenter</i>: domovská stránka</li>
+    <li><i>app/Presenters/HotelPresenter</i>: přehled hotelů, editace a přidávání hotelů, zobrazení informací o jednotlivých hotelech</li>
+    <li><i>app/Presenters/ReservationPresenter</i>: přehled, správa a editace rezervací</li>
+    <li><i>app/Presenters/RoomPresenter</i>: </li>
+    <li><i>app/Presenters/UserPresenter</i>: </li>
+    <li><i>app/Presenters/Error4xxPresenter</i>: zpracování chyb s kódem 4xx</li>
+    <li><i>app/Presenters/ErrorPresenter</i>: zpracování chyb</li>
+</ul>
+
+<p>Popis pomocných tříd, traitů a komponent</p>
+<ul>
+    <li><i>app/orm/entity/BaseEntity</i>: abstraktní třída obsahující základní metody a atributy pro všechny ostatní entity</li>
+    <li><i>app/orm/entity/EntityImageTrait</i>: trait obsahující metody pro práci s obrázky, používají ho entity Hotel a Room</li>
+    <li><i>app/orm/repository/BaseRepository</i>: abstraktní třída obsahující základní metody pro ostatní repository</li>
+    <li><i>app/orm/repository/DataTableRepository</i>: abstraktní třída implementující základní chování očekávané komponentou DataTable, 
+        repository dědící od této třídy by měly implementovat metodu pro aplikaci filtrů a vhodným způsobem upravit metodu pro získání dat pro komponentu DataTable</li>
+    <li><i>app/Components/DataTable</i>: komponenta, která se stará o vykreslování přehledu hotelů a pokojů</li>
+</ul>
+
+<h3>Databáze</h3>
+
+<p><img src="db_schema.PNG" alt="schema"/></p>
+
+<h2>Instalace</h2>
+
+<p>Požadavky</p>
+<ul>
+    <li>Webový server, např. Apache + MySQL + PHP >= 7.2. Možno nainstalovat zvlášť nebo nainstalovat XAMPP nebo třeba WAMP.</li>
+    <li>Composer pro instalaci PHP závislostí.</li>
+    <li>Bower pro instalaci JS a CSS knihoven.</li>
+</ul>
+
+<p>Postup instalace</p>
+<ol>
+    <li>Rozbalit projekt na Vámi zvolené místo.</li>
+    <li>V kořenovém adresáři projektu zadat příkaz composer install a bower install pro nainstalování knihoven.</li>
+    <li>Přidat virtuálního hosta na Váš server s cestou směřující do www adresáře projektu.</li>
+</ol>
+
+<p>Inicializace a konfigurace databáze</p>
+<ul>
+    <li>Pro vytvoření databáze stačí spustit SQL skript nacházející se ve složce sql.</li>
+    <li>Konfiguraci připojení k databázi je nutné provést v souboru app/config/local.neon zde je zapotřebí nastavit příslušné hodnoty pro přístup k databázi.</li>
+</ul>
+
+</body>
+</html>

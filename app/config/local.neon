@@ -1,0 +1,9 @@
+parameters:
+
+
+database:
+	dsn: 'mysql:host=localhost;dbname=hotel_system;port=3306'
+	user: 'root'
+	password:
+	options:
+	    lazy: yes

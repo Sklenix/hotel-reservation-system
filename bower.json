@@ -1,0 +1,33 @@
+{
+  "name": "Kataraz",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "client",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^4.5.3",
+    "grido": "^3.1",
+    "font-awesome": "^4.7.0",
+    "ajax-chosen": "^1.0.3",
+    "nette-forms": "^2.4.2",
+    "nette-live-form-validation": "^1.8.1",
+    "history.nette.ajax.js": "^2.0.0",
+    "jquery": "^3.1.1",
+    "nette.ajax.js": "^2.2.0",
+    "spinner.ajax": "https://github.com/vojtech-dobes/nette.ajax.js/blob/master/extensions/spinner.ajax.js"
+  },
+  "private": true,
+  "resolutions": {
+    "nette-forms": "^2.4.2",
+    "nette.ajax.js": "^2.2.0",
+    "jquery": ">=1.7"
+  }
+}

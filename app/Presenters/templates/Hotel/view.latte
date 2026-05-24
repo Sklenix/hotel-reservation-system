@@ -1,0 +1,54 @@
+{layout '../@layoutView.latte'}
+
+{block header}
+    <div class="row">
+        <div class="col-12 text-center" style="margin-top:20px;margin-bottom: 15px;"><h1>{$name}</h1>
+            <hr>
+        </div>
+    </div>
+{/block}
+
+{block imageAddition}
+    <ul class="list-group" style="margin-top:15px;">
+        <li class="list-group-item text-right">
+            <span class="pull-left">
+                <strong>Počet hvězdiček:</strong>
+            </span>
+            <i n:for="$i = 0; $i < $starRating; $i++" class="fa fa-star" aria-hidden="true"></i>
+        </li>
+    </ul>
+    <div style="display: flex; flex-direction: column;">
+        <a style="margin-top: 10px; max-width: 225px;" n:href="Room:default $hotelId" class="btn btn-primary">Seznam pokojů hotelu</a>
+        <a style="margin-top: 10px; max-width: 225px;" n:href="Hotel:edit $hotelId" n:if="$user->getId() === $owner->getId() || $user->isInRole('admin')" class="btn btn-primary">Editovat hotel</a>
+        <a style="margin-top: 10px; max-width: 225px;" n:href="Room:edit hotelId => $hotelId" n:if="$user->getId() === $owner->getId() || $user->isInRole('admin')" class="btn btn-primary">Přidat pokoj</a>
+        <a style="margin-top: 10px; max-width: 225px;" n:href="Reservation:default hotelId => $hotelId" n:if="$userAllowedToViewReservations" class="btn btn-primary">Zobrazit rezervace hotelu</a>
+    </div>
+{/block}
+
+{block body}
+    <div class="tab-pane active" id="obecneUdaje" style="font-size: 18px;">
+        <div class="col-lg-8 col-md-12 col-sm-12 ">
+            <h4><i class="fa fa-search" aria-hidden="true"></i> Popis</h4>
+            <p style="text-align: justify;">{$description}</p>
+            <hr>
+            <h4 style="margin-top:15px;"><i class="fa fa-address-card" aria-hidden="true"></i> Adresa hotelu</h4>
+            {$fullAddress}
+            <hr>
+            <h4 style="margin-top:15px;"><i class="fa fa-envelope" aria-hidden="true"></i> Email</h4>
+            {$email}
+            <hr>
+            <h4 style="margin-top:15px;"><i class="fa fa-phone" aria-hidden="true"></i> Telefon</h4>
+            {$phone}
+            <hr>
+            <h4 style="margin-top:15px;"><i class="fa fa-user-circle" aria-hidden="true"></i> Majitel</h4>
+            {$owner->getFullName()}<br>
+            Email: {$owner->getEmailLink()}<br>
+            Telefon: {$owner->getPhone()}
+            <hr>
+            <h4 style="margin-top:15px;"><i class="fa fa-user-circle" aria-hidden="true"></i> Recepční</h4>
+            {foreach $receptionists as $receptionist}
+                {$receptionist->getFullName()}<br>
+            {/foreach}
+        </div>
+    </div>
+{/block}

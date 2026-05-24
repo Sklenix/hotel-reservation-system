@@ -1,0 +1,68 @@
+{layout '../@dashboard.latte'}
+
+{block content}
+    <!-- Vlastnosti systému-->
+    <section class="page-section"  id="vlastnosti" style="padding-top:40px;padding-bottom: 60px;background-color: #F5F5F5" >
+        <div class="container">
+            <h2 class="text-center">Nevíte kam? Zkuste třeba...</h2>
+            <hr style="background-color: #FF7F50;padding-top:2px;">
+            <div class="row">
+                <div n:foreach="$rooms as $room" class="col-lg-3 col-md-6 text-center">
+                    <div class="mt-5">
+                        {var $equipment = implode(', ', $room->getEquipment())}
+                        <a n:href="Room:view roomId => $room->getId()">
+                            <h3 class="h4 mb-2">Pokoj {$room->getCapacity()} lůžkový hotel {$room->getHotel()->getName()}</h3>
+                            {foreach $room->getImages() as $image}
+                                <img src="{$image->resize(250, 250)|dataStream}">
+                                {breakIf $iterator->isFirst()}
+                            {/foreach}
+                        </a>
+                        <p class="text-muted mb-0 text-center">
+                            Cena: {$room->getPrice()} Kč<br>
+                            Vybavení: {$equipment}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Kontakty-->
+    <section class="page-section" id="kontakty" style="background-color: #F5F5F5;color:black;padding-top:60px;padding-bottom:30px;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 >Kontakty</h2>
+                    <hr style="background-color: #FF7F50;padding-top:2px;">
+
+                    <p class="text-black" style="font-size: 20px;margin-top:10px;">Pavel Sklenář</p>
+                    <p class="text-black" style="font-size: 20px;margin-top:10px;">Matěj Hlávka</p>
+                    <p class="text-black" style="font-size: 20px;margin-top:10px;">Tomáš Křenek</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 ml-auto text-center mb-5 mb-lg-0">
+                    <i class="fa fa-phone fa-3x"></i>
+                    <div class="">+420 123 456 789
+                    </div>
+                </div>
+                <div class="col-lg-4 mr-auto text-center">
+                    <i class="fa fa-envelope fa-3x"></i>
+                    <a class="d-block " href="mailto:sklenar@aksklenar.com">hotel@gmail.com</a>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <center><p class="">Informační systém pro hotelnictví 2020.</p><br></center>
+    </section>
+
+    <!-- Patička-->
+    <footer class="bg-light ">
+        <div class="container"><br>
+            <center><div class="small text-center text-muted">Copyright&copy 2020</div></center>
+        </div>
+        <br>
+    </footer>
+{/block}

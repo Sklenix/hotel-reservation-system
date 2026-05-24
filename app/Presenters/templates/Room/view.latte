@@ -1,0 +1,39 @@
+{layout '../@layoutView.latte'}
+
+{block header}{/block}
+{block imageAddition}
+    <div style="display: flex; flex-direction: column;">
+        <a style="margin-top: 10px; max-width: 225px;" n:if="$isUserOwner || $user->isInRole(HotelSystem\Model\Repository\UserRepository::ROLE_ADMIN)" n:href="Room:edit $roomId" class="btn btn-primary">Editovat pokoj</a>
+        <a style="margin-top: 10px; max-width: 225px;" n:if="$isUserReceptionist || $user->isInRole(HotelSystem\Model\Repository\UserRepository::ROLE_ADMIN)" n:href="Reservation:default roomId => $roomId" class="btn btn-primary">Přehled rezervací pokoje</a>
+        <a style="margin-top: 10px; max-width: 225px;" n:href="Hotel:view hotelId => $hotelId" class="btn btn-primary">Zobrazit hotel</a>
+    </div>
+{/block}
+
+{block body}
+    <div class="tab-pane active" id="obecneUdaje" style="font-size: 18px;">
+        <div class="col-lg-8 col-md-12 col-sm-12 ">
+            <h4><i class="fa fa-address-card" aria-hidden="true"></i> Hotel</h4>
+            <p style="text-align: justify;">{$hotelName}</p>
+            <hr>
+            <h4><i class="fa fa-money" aria-hidden="true"></i> Cena</h4>
+            <p style="text-align: justify;">{$price} Kč</p>
+            <hr>
+            <h4 style="margin-top:15px;"><i class="fa fa-address-card" aria-hidden="true"></i> Typ</h4>
+            {$type}
+            <hr>
+            <h4 style="margin-top:15px;"><i class="fa fa-address-card" aria-hidden="true"></i> Číslo pokoje</h4>
+            {$roomNumber}
+            <hr>
+            <h4 style="margin-top:15px;"><i class="fa fa-tasks" aria-hidden="true"></i> Počet lůžek</h4>
+            {$capacity}
+            <hr>
+            <h4 style="margin-top:15px;"><i class="fa fa-info-circle" aria-hidden="true"></i> Vybavení</h4>
+            {$equipment}
+            <a style="margin-top: 10px;" n:href="Reservation:edit roomId => $roomId" class="btn btn-primary">Rezervovat pokoj</a>
+            <div style="text-align: center; margin: 10px;">
+                <h4>Dostupnost pokoje</h4>
+                {control reservationCalendar}
+            </div>
+        </div>
+    </div>
+{/block}

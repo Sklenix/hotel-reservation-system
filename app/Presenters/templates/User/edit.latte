@@ -1,0 +1,11 @@
+{layout '@layout.latte'}
+
+{block jmeno}
+    {if !$user->isLoggedIn()} Registrace {else} Editace profilu {/if}
+{/block}
+{block userForm}
+    <div class="alert alert-warning" role="alert">
+        Položky označené (<span style="color:red;">*</span>) jsou povinné.
+    </div>
+    {control registerForm}
+{/block}
